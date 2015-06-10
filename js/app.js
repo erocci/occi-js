@@ -1,9 +1,9 @@
 /*global angular */
 
-'use strict';
+'use strict=true';
 
 angular.module('occiApp', [
-    'occiApp.services',
+    // 'occiApp.services',
     'occiApp.controllers',
     'occiApp.directives',
     'occiApp.utils',
@@ -11,22 +11,20 @@ angular.module('occiApp', [
     'ui.router'
 ])
 
-    .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
-		
-		$urlRouterProvider.otherwise('/main');
-		
-		$stateProvider
+.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 
-			.state('main', {
-				url: '/main',
-				controller: 'globalCtrl',
-				templateUrl: 'partials/main.html',
-			})
+    $urlRouterProvider.otherwise('/main');
 
-			.state('conform', {
-				url: '/conform/:endpoint',
-				controller: 'conformCtrl',
-				templateUrl: 'partials/conform.html'
-			});
+    $stateProvider
+    .state('main', {
+        url: '/main',
+        controller: 'globalCtrl',
+        templateUrl: 'partials/main.html',
+    })
+    .state('conform', {
+        url: '/conform/:endpoint',
+        controller: 'conformCtrl',
+        templateUrl: 'partials/conform.html'
+    });
 
-	}]);
+}]);

@@ -1,66 +1,43 @@
+/*global mocha:false */
+/*global testSuite:false */
 /*global angular,document */
 
-'use strict';
+'use strict=true';
 
 angular.module('occiApp.controllers', [])
 
-	.controller('globalCtrl', ['$scope', '$state', function($scope, $state) {
-		$scope.url = undefined;
+.controller('globalCtrl', ['$scope', '$http', '$state', function($scope, $http, $state) {
 
-		$scope.go = function() {
-			$state.go('conform', { 'endpoint': encodeURIComponent($scope.url)});
-		};
-	}])
+	$scope.baseurl = null;
 
-	.controller('conformCtrl', ['$scope', '$stateParams', '$http', '$timeout', 'tests', function($scope, $stateParams, $http, $timeout, tests) {
-		var parser = document.createElement('a');
-		parser.href = decodeURIComponent($stateParams.endpoint);
-		$scope.baseurl = parser.protocol + '//' + parser.host;
-		
-		var req = {
+	testSuite.init();
+
+	$scope.go = function() {
+		// $state.go('conform', { 'endpoint': encodeURIComponent($scope.url)});
+		$('#test-suite-results > div').empty();
+		testSuite.run({
 			method: 'GET',
-			url: $scope.baseurl + '/'
-		};
+			url: $scope.baseurl,
+			accept: $scope.renderer
+		});
+	};
+}])
 
-		$http(req)
-			.success(function(data, status, headers, config) {
-				var server = headers('server').split(" ");
-				$scope.online = 1;
-				$scope.server = server[0];
-				$scope.occi = server[1];
-			})
-			.error(function(data, status, headers, config) {
-				$scope.online = 0;
-			});
+.controller('conformCtrl', ['$scope', '$stateParams', '$http', '$timeout', function($scope, $stateParams, $http, $timeout) {
+	var parser = document.createElement('a');
+	parser.href = decodeURIComponent($stateParams.endpoint);
+	$scope.baseurl = parser.protocol + '//' + parser.host;
 
-		$scope.groups = [];
+	$scope.groups = [];
 
-		t.run_groups(tests.groups,
-					 function(g) {
-						 $scope.groups.push({
-							 desc: g.desc,
-							 tests: []
-						 });
-					 },
-					 function(g) {
-						 
-					 }
-					);
-		
-		var run = function() {
-			if (groups.length > 0) {
-				var g = groups.pop();
-				var result = {
-					desc: g.desc,
-					tests: []
-				};
-				
-				$scope.groups.push(result);
-				t.run(g, function() {
-					s
-				});
-				$timeout(run, 1000);
-			}
-		};
-		$timeout(run, 1000);
-	}]);
+
+	/**
+	 * Run test suite
+	 * @method function
+	 * @return {[type]} [description]
+	 */
+	var run = function() {
+	};
+
+
+}]);

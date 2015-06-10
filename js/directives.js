@@ -1,6 +1,6 @@
 /*global angular */
 /*global splitObject */
 
-'use strict';
+'use strict=true';
 
 angular.module('occiApp.directives', []);

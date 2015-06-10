@@ -1,71 +1,102 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="occiApp">
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>OCCI.js</title>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>OCCI.js</title>
 
-    <!-- JS libs -->
-    <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
-    <script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
-    <script type="text/javascript" src="bower_components/angular-resource/angular-resource.min.js"></script>
-    <script type="text/javascript" src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
-    <script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <!-- JS libs -->
+  <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
+  <script type="text/javascript" src="bower_components/angular-resource/angular-resource.min.js"></script>
+  <script type="text/javascript" src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+  <script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="bower_components/mocha/mocha.js"></script>
+  <script type="text/javascript" src="bower_components/chai/chai.js"></script>
 
-	<!-- JS app -->
-    <script type="text/javascript" src="js/app.js"></script>
-    <script type="text/javascript" src="js/services.js"></script>
-    <script type="text/javascript" src="js/directives.js"></script>
-    <script type="text/javascript" src="js/controllers.js"></script>
-    <script type="text/javascript" src="js/utils.js"></script>
-	
-    <!-- CSS libs -->
-    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet" />
-	
-    <!-- CSS app -->
-    <link href="css/custom.css" rel="stylesheet" />
+  <!-- JS app -->
+  <script type="text/javascript" src="js/app.js"></script>
+  <!--script type="text/javascript" src="js/services.js"></script-->
+  <script type="text/javascript" src="js/directives.js"></script>
+  <script type="text/javascript" src="js/controllers.js"></script>
+  <script type="text/javascript" src="js/utils.js"></script>
+  <script type="text/javascript" src="js/tests.js"></script>
 
-    <link rel="icon" type="image/png" href="img/occi_js-logo-only.png" />
-    
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-		<![endif]-->
-	
-  </head>
-  <body ng-controller="globalCtrl">
-    <nav class="navbar navbar-default navbar-fixed-top">
-      <div class="container-fluid">
-	<div class="navbar-header">
-	  <button type="button" class="navbar-toggle collapsed"
-		  data-toggle="collapse" data-target="#navbar-form">
-	    <span class="sr-only">Toggle navigation</span>
-	    <span class="icon-bar"></span>
-	    <span class="icon-bar"></span>
-	    <span class="icon-bar"></span>
-	  </button>
-	  <a class="navbar-brand" ui-sref="main">
-	    <img alt="occi.js logo" src="img/occi_js-logo.png" />
-	  </a>
-	</div>
+  <!-- CSS libs -->
+  <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet" />
+  <link href="bower_components/mocha/mocha.css" rel="stylesheet" />
 
-	<div class="collapse navbar-collapse" id="navbar-form">
-	  <form class="navbar-form navbar-right" role="endpoint" ng-submit="go()">
-	    <div class="form-group">
-	      <input type="text" class="form-control" placeholder="http://localhost:8000" ng-model="url" />
-	    </div>
-	    <button type="submit" class="btn btn-default">Go</button>
-	  </form>
-	</div>
-      </div>
-    </nav>
+  <!-- CSS app -->
+  <link href="css/custom.css" rel="stylesheet" />
 
+  <link rel="icon" type="image/png" href="img/occi_js-logo-only.png" />
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <link src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+</head>
+<body ng-controller="globalCtrl">
+  <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
-      <div class="content" ui-view></div>
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed"
+        data-toggle="collapse" data-target="#navbar-form">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" ui-sref="main">
+        <img alt="occi.js logo" src="img/occi_js-logo.png" />
+      </a>
     </div>
-  </body>
+
+    <div class="collapse navbar-collapse" id="navbar-form"></div>
+  </nav>
+
+  <div class="container-fluid">
+    <div class="row-fluid">
+      <div class="col-md-12">
+        <form class="form form-inline" ng-submit="go()">
+          <div class="form-group">
+            <label for="occi-server-address-input" class="control-label">OCCI server address:</label>
+            <input id="occi-server-address-input" type="text" class="form-control" placeholder="http://localhost:8000" ng-model="baseurl" />
+          </div>
+
+          <div class="form-group">
+            <label for="occi-server-accept-select" class="control-label" ng-model="renderer">Renderer:</label>
+            <select class="form-control">
+              <option>text/plain</option>
+              <option>text/occi</option>
+              <option>application/json</option>
+            </select>
+          </div>
+
+          <button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-flash"></i> Test</button>
+        </form>
+      </div>
+
+      <div class="col-md-12">
+        <div ng-show="!baseurl" class="alert alert-info">
+          Please input an endpoint and press go to launch test suite.
+        </div>
+      </div>
+    </div>
+
+    <div class="row-fluid">
+      <div id="test-suite-results" class="col-md-12">
+        <div id="mocha"></div>
+        <div id="messages"></div>
+        <div id="fixtures"></div>
+      </div>
+    </div>
+  </div>
+
+</body>
 </html>

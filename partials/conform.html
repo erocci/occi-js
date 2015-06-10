@@ -7,8 +7,8 @@
 	  <li class="list-group-item col-xs-6 col-md-4"><emph>Server Name:</emph> {{ server }}</li>
 	  <li class="list-group-item col-xs-6 col-md-4"><emph>Announced OCCI Version:</emph> {{ occi }}</li>
 	</ul>
-	<div ng-show="!online" class="bg-danger">
-	  Endpoint is unreachable
+	<div ng-show="!online" class="alert alert-info">
+	  Please input an endpoint and press go to launch test suite.
 	</div>
   </div>
 </div>
