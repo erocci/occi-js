@@ -37,7 +37,7 @@
 		<![endif]-->
 	
   </head>
-  <body ng-controller="globalCtrl as global">
+  <body ng-controller="globalCtrl">
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container-fluid">
 	<div class="navbar-header">
@@ -48,20 +48,24 @@
 	    <span class="icon-bar"></span>
 	    <span class="icon-bar"></span>
 	  </button>
-	  <a class="navbar-brand" href="#">
+	  <a class="navbar-brand" ui-sref="main">
 	    <img alt="occi.js logo" src="img/occi_js-logo.png" />
 	  </a>
 	</div>
 
 	<div class="collapse navbar-collapse" id="navbar-form">
-	  <form class="navbar-form navbar-right" role="endpoint">
+	  <form class="navbar-form navbar-right" role="endpoint" ng-submit="go()">
 	    <div class="form-group">
-	      <input type="text" class="form-control" placeholder="http://localhost:8000" />
+	      <input type="text" class="form-control" placeholder="http://localhost:8000" ng-model="url" />
 	    </div>
 	    <button type="submit" class="btn btn-default">Go</button>
 	  </form>
 	</div>
       </div>
     </nav>
+
+    <div class="container-fluid">
+      <div class="content" ui-view></div>
+    </div>
   </body>
 </html>

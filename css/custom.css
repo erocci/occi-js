@@ -4,3 +4,18 @@
 body {
 	padding-top: 70px;
 }
+
+.main {
+	background-color: #0e0e0e;
+	color: #dddddd;
+}
+
+.valign {
+	display: inline-block;
+    vertical-align: middle;
+    float: none;
+}
+
+.infos li {
+	border: none;
+}

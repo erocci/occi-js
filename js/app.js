@@ -11,10 +11,6 @@ angular.module('occiApp', [
     'ui.router'
 ])
 
-	.run(['$rootScope', '$state', function($rootScope, $state) {
-		return;
-    }])
-
     .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 		
 		$urlRouterProvider.otherwise('/main');
@@ -23,13 +19,14 @@ angular.module('occiApp', [
 
 			.state('main', {
 				url: '/main',
+				controller: 'globalCtrl',
 				templateUrl: 'partials/main.html',
 			})
 
 			.state('conform', {
-				url: '/conform',
-				controller: 'conformCtrl as conform',
-				templateUrl: 'partials/conform.html',
+				url: '/conform/:endpoint',
+				controller: 'conformCtrl',
+				templateUrl: 'partials/conform.html'
 			});
 
 	}]);
