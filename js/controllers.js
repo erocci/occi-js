@@ -8,7 +8,7 @@ angular.module('occiApp.controllers', [])
 
 .controller('globalCtrl', ['$scope', '$http', '$state', function($scope, $http, $state) {
 
-	$scope.baseurl = null;
+	$scope.baseurl = 'http://localhost:32768'; // Default erocci docker URL
 
 	testSuite.init();
 
