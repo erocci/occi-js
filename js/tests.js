@@ -38,15 +38,15 @@ var testSuite = (function () {
         return path1 + path2 || '';
     };
 
-    var requestFor = function (path, onCompleteCallback) {
+    var requestFor = function (path, options, onCompleteCallback) {
 
         var returnCode, response = {};
 
         $.ajax({
             url: concatUrl(req.url, path),
-            type: req.method,
+            type: options.method || req.method,
             headers: {
-                accept: req.accept
+                accept: options.accept || req.accept
             }
         })
         .done(function(data, textStatus, jqXHR) {
@@ -82,7 +82,7 @@ var testSuite = (function () {
             this.timeout(5000); // 5 secondes of timeout for each async test
 
             it('Should return version 1.2', function (done) {
-                requestFor('-/', function (err, data) {
+                requestFor('-/', {}, function (err, data) {
                     expect(err, 'server should return 200 OK').to.equal(200);
                     expect(data.server, 'server should return its version.').to.exist;
                     if (data && data.server) {
@@ -90,6 +90,21 @@ var testSuite = (function () {
                         expect(srv, 'server value in header to contains 2 words.').to.have.length(2);
                     }
                     // expect(data.version).to.equal(1.2);
+                    done();
+                });
+            });
+        });
+
+        describe('OCCI server accept JSON', function () {
+
+            this.timeout(5000); // 5 secondes of timeout for each async test
+
+            it('Should return json', function (done) {
+                requestFor('-/', { accept: ' application/json' }, function (err, data) {
+                    expect(err, 'server should return 200 OK').to.equal(200);
+                    expect(data.body.kinds, 'server should return kinds.').to.exist;
+                    expect(data.body.mixins, 'server should return mixins.').to.exist;
+                    expect(data.body.actions, 'server should return actio$ns.').to.exist;
                     done();
                 });
             });
